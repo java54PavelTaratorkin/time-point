@@ -14,25 +14,27 @@ public class TimePoint implements Comparable<TimePoint>{
 		return timeUnit;
 	}
 	public TimePoint convert(TimeUnit unit) {
-		// TODO Auto-generated method stub
 		//returns new TimePoint with a given TimeUnit
-		return null;
+		int newTimeAmount = amount * timeUnit.getValue() / unit.getValue();
+		return new TimePoint(newTimeAmount, unit);
 	}
 	public TimePoint with(TimePointAdjuster adjuster) {
-		//TODO
 		//returns new TimePoint based on any TimePointAdjuster
-		return null;
+		return adjuster.adjust(this);
 	}
 	@Override
 	public int compareTo(TimePoint o) {
-		// TODO Auto-generated method stub
-		return 0;
+		int thisValue = this.amount * this.timeUnit.getValue();
+		int otherValue = o.amount * o.timeUnit.getValue();
+		return Integer.compare(thisValue, otherValue);
 	}
 	@Override
 	public boolean equals(Object obj) {
-		//TODO
-		return false;
+		boolean res = false;
+		if (obj != null && obj instanceof TimePoint) {
+			res = this.compareTo((TimePoint)obj) == 0;
+		}
+		return res;
 	}
-	
 	
 }
